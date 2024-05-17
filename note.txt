@@ -1,3 +1,13 @@
+=== CÁCH CHẠY ===
+note: chạy trong terminal 🥸
+
+1. chạy tất cả các file test 😙
+npm run test
+
+2. chạy 1 file chỉ định
+mocha src/test/tên_file_chỉ_định.spec.js --timeout=10000
+
+=== Kiến thức tích luỹ ===
 1. So sánh test
 const { expect } = require("chai");
 expect(attrPlaceholder).to.equal("Email của bạn *");

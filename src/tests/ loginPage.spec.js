@@ -21,14 +21,6 @@ describe("Login Page", () => {
     const attrPlaceholder = await emailField.getAttribute("placeholder");
 
     expect(attrPlaceholder).to.equal("Email của bạn *");
-    // const errorMsg = await driver
-    //   .wait(
-    //     until.elementLocated(
-    //       By.xpath("/html/body/section[2]/div/div/div[1]/form/p[1]")
-    //     ),
-    //     10000
-    //   )
-    //   .getText();
   }).timeout(10000);
 
   it("Check issue display error message when @ character not exist in email field", async () => {

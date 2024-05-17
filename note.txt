@@ -33,3 +33,6 @@ until.elementLocated(
 
 6. findElement
 await driver.findElement(By.className("pHiOh"))
+
+7. driver.sleep(2000)
+Dùng để delay code 1 khoảng thời gian

@@ -1,0 +1,25 @@
+1. So sánh test
+const { expect } = require("chai");
+expect(attrPlaceholder).to.equal("Email của bạn *");
+
+2. Đợi 1 phần tử hiện ra chưa có sẵn trên UI cần set time đợi
+drive.until.elementLocated(
+    By.xpath("/html/body/section[2]/div/div/div[1]/form/p[1]")
+),10000).getText()
+
+- Ví dụ trên là lấy thông báo lỗi tự sinh ra nếu sai tài khoản
+delay 10000 = 10s
+
+3. Lấy URL hiện tại
+await driver.getCurrentUrl()
+
+4. Để expect lỗi
+expect.fail("Error message not displayed");
+
+5. elementLocated
+until.elementLocated(
+    By.xpath("/html/body/section[2]/div/div/div[1]/form/p[1]")
+)
+
+6. findElement
+await driver.findElement(By.className("pHiOh"))

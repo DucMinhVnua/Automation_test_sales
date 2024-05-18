@@ -5,6 +5,11 @@ const {
   getFieldEmail,
   onClickLoginBtn,
   getMessageEmailError,
+  getFieldPassword,
+  getMessagePasswordError,
+  getTextOfLoginBtn,
+  getTextOfForgotPasswordBtn,
+  getElmForgotPassword,
 } = require("../pages/loginPage.js");
 const config = require("../config/config.js");
 
@@ -46,6 +51,53 @@ describe("Login Page", () => {
 
     const errorMsg = await getMessageEmailError(driver);
     expect(errorMsg).to.equal("Vui lòng nhập email đăng nhập");
+  }).timeout(10000);
+
+  it("Check issue display error when password empty", async () => {
+    await openLoginPage(driver);
+
+    let isError = false;
+
+    // Kiểm tra trường bấm mà chưa nhập khoảng trắng
+    await onClickLoginBtn(driver);
+    await driver.sleep(2000);
+    const errorMsg = await getMessagePasswordError(driver);
+    const isError1 = errorMsg === "Vui lòng nhập mật khẩu đăng nhập";
+
+    // Kiểm tra trường hợp bấm đa nhập khoảng trắng
+    const fieldPassword = await getFieldPassword(driver);
+    fieldPassword.sendKeys("      ");
+    await onClickLoginBtn(driver);
+    await driver.sleep(2000);
+    const errorMsg1 = await getMessagePasswordError(driver);
+    const isError2 = errorMsg1 === "Vui lòng nhập mật khẩu đăng nhập";
+
+    // Thoả mãn 2 điều kiện đã đề ra
+    isError = isError1 && isError2;
+
+    expect(isError).to.equal(true);
+  }).timeout(10000);
+
+  it("Check text of login button", async () => {
+    await openLoginPage(driver);
+    const textOfLoginBtn = await getTextOfLoginBtn(driver);
+    expect(textOfLoginBtn).to.equal("ĐĂNG NHẬP");
+  }).timeout(10000);
+
+  it("Check text of forgot password", async () => {
+    await openLoginPage(driver);
+    const textOfForgotPasswordBtn = await getTextOfForgotPasswordBtn(driver);
+    expect(textOfForgotPasswordBtn).to.equal("Quên mật khẩu");
+  }).timeout(10000);
+
+  it("Check navigate of forgot password", async () => {
+    await openLoginPage(driver);
+    const elmForgotPassword = await getElmForgotPassword(driver);
+    await elmForgotPassword.click();
+    await driver.sleep(2000);
+
+    const currentUrl = await driver.getCurrentUrl();
+    expect(new URL(currentUrl).pathname).to.equal("/forgot/password");
   }).timeout(10000);
 
   after(async () => {

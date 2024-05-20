@@ -74,6 +74,14 @@ const getElmForgotPassword = async (driver) => {
   return link;
 };
 
+const getMessageLoginFail = async (driver) => {
+  const messageError = await driver
+    .wait(until.elementLocated(By.xpath("/html/body/div[3]/div/div[3]")), 10000)
+    .getText();
+
+  return messageError;
+};
+
 module.exports = {
   openLoginPage,
   onClickLoginBtn,
@@ -84,4 +92,5 @@ module.exports = {
   getTextOfLoginBtn,
   getTextOfForgotPasswordBtn,
   getElmForgotPassword,
+  getMessageLoginFail,
 };

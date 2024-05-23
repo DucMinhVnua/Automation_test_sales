@@ -13,7 +13,7 @@ const {
 } = require("../pages/forgotPage.js");
 const config = require("../config/config.js");
 
-describe("Login Page", () => {
+describe("Forgot Page", () => {
   let driver;
 
   before(async () => {

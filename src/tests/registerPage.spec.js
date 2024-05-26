@@ -45,7 +45,7 @@ describe("Register Page", () => {
     expect(attrPlaceholder).to.equal("Họ và tên *");
   });
 
-  it("Kiểm tra Email là trường bắt buộc", async () => {
+  it("Kiểm tra thông báo lỗi khi trường Email là rỗng", async () => {
     await openRegisterPage(driver);
     await onClickRegisterBtn(driver);
 

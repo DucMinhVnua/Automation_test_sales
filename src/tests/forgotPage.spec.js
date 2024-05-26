@@ -120,7 +120,7 @@ describe("Forgot Page", () => {
     expect(loginUrl).to.equal(newUrl);
   });
 
-  it("Kiểm tra điều hướng khi nhấn vào nút Quay về trang đăng nhập", async () => {
+  it("Kiểm tra tên của nút Quay về đăng nhập", async () => {
     await openForgotPage(driver);
     const textBackToLoginBtn = await getTextBackToLoginBtn(driver);
     expect(textBackToLoginBtn).to.equal("Quay về màn đăng nhập");

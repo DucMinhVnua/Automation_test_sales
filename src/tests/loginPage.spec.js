@@ -163,7 +163,7 @@ describe("Login Page", () => {
 
     // get email field
     const emailField = await getFieldEmail(driver);
-    await emailField.sendKeys("ndminhvnua@gmail.com");
+    await emailField.sendKeys("toothless@gmail.com");
 
     // get password field
     const fieldPassword = await getFieldPassword(driver);
@@ -182,11 +182,11 @@ describe("Login Page", () => {
 
     // get email field
     const emailField = await getFieldEmail(driver);
-    await emailField.sendKeys("ndminhvnua@gmail.com");
+    await emailField.sendKeys("toothless@gmail.com");
 
     // get password field
     const fieldPassword = await getFieldPassword(driver);
-    fieldPassword.sendKeys("123456789");
+    fieldPassword.sendKeys("123456");
     await onClickLoginBtn(driver);
 
     await driver.sleep(1000);

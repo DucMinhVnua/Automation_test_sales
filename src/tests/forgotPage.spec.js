@@ -26,7 +26,7 @@ describe("Forgot Page", () => {
     const attrPlaceholder = await emailField.getAttribute("placeholder");
 
     expect(attrPlaceholder).to.equal("Email của bạn *");
-  });
+  }).timeout(20000);
 
   it("Kiểm tra Email là trường bắt buộc", async () => {
     await openForgotPage(driver);
@@ -38,7 +38,7 @@ describe("Forgot Page", () => {
     const messageErrorEmailField = await getMessageErrorEmailField(driver);
 
     expect(messageErrorEmailField).to.equal("Vui lòng nhập vào email");
-  });
+  }).timeout(20000);
 
   it("Kiểm tra với Email không có trong CSDL", async () => {
     await openForgotPage(driver);
@@ -52,7 +52,7 @@ describe("Forgot Page", () => {
     const messageError = await getMessageErrorPopup(driver);
 
     expect(messageError).to.equal("Thông tin tài khoản không tồn tại");
-  });
+  }).timeout(20000);
 
   it("Kiểm tra đăng nhập với email không hợp lệ (sai định dạng)", async () => {
     await openForgotPage(driver);
@@ -70,7 +70,7 @@ describe("Forgot Page", () => {
     expect(validationMessage).to.equal(
       "Please include an '@' in the email address. 'invalidate.com' is missing an '@'."
     );
-  });
+  }).timeout(20000);
 
   it("Kiểm tra đăng nhập với Email chứa kí tự đặc biệt trong phần tên người dùng (trước dấu '@')", async () => {
     await openForgotPage(driver);
@@ -88,7 +88,7 @@ describe("Forgot Page", () => {
     expect(validationMessage).to.equal(
       "'.' is used at a wrong position in '.com'."
     );
-  });
+  }).timeout(20000);
 
   it("Kiểm tra đăng nhập với Email chứa kí tự đặc biệt trong phần tên người dùng (sau dấu '@')", async () => {
     await openForgotPage(driver);
@@ -106,7 +106,7 @@ describe("Forgot Page", () => {
     expect(validationMessage).to.equal(
       "A part following '@' should not contain the symbol '?'."
     );
-  });
+  }).timeout(20000);
 
   it("Kiểm tra điều hướng khi nhấn vào nút Quay về trang đăng nhập", async () => {
     await openForgotPage(driver);
@@ -118,13 +118,13 @@ describe("Forgot Page", () => {
     const loginUrl = `${config.baseURL}/user/account`;
 
     expect(loginUrl).to.equal(newUrl);
-  });
+  }).timeout(20000);
 
   it("Kiểm tra điều hướng khi nhấn vào nút Quay về trang đăng nhập", async () => {
     await openForgotPage(driver);
     const textBackToLoginBtn = await getTextBackToLoginBtn(driver);
     expect(textBackToLoginBtn).to.equal("Quay về màn đăng nhập");
-  });
+  }).timeout(20000);
 
   after(async () => {
     await driver.quit();

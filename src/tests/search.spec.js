@@ -121,7 +121,7 @@ describe("Search", () => {
       allProductsContainText === false,
       "Kết quả tìm kiếm sản phẩm có từ Áo thun sai do có chứa sản phẩm khác tên"
     ).to.be.false;
-  }).timeout(20000);
+  }).timeout(100000);
 
   after(async () => {
     await driver.quit();

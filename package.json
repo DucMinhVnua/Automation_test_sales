@@ -4,8 +4,8 @@
   "description": "Selenium WebDriver example with JavaScript",
   "main": "index.js",
   "scripts": {
-    "test": "mocha src/tests/*.spec.js --timeout 10000",
-    "test-mc": "mocha src/tests/*.spec.js --timeout 10000 --reporter mochawesome --require mochawesome/register"
+    "test": "npx mocha src/tests/*.spec.js --reporter mochawesome",
+    "report": "marge mochawesome-report/mochawesome.json"
   },
   "dependencies": {
     "chai": "^4.0.0",

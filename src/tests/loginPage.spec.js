@@ -118,13 +118,13 @@ describe("Login Page", () => {
     expect(isError).to.equal(true);
   }).timeout(20000);
 
-  it("Check text of login button", async () => {
+  it("Kiểm tra tên nút Đăng nhập", async () => {
     await openLoginPage(driver);
     const textOfLoginBtn = await getTextOfLoginBtn(driver);
     expect(textOfLoginBtn).to.equal("ĐĂNG NHẬP");
   }).timeout(20000);
 
-  it("Check text of forgot password", async () => {
+  it("Kiểm tra tên nút Quên mật khẩu", async () => {
     await openLoginPage(driver);
     const textOfForgotPasswordBtn = await getTextOfForgotPasswordBtn(driver);
     expect(textOfForgotPasswordBtn).to.equal("Quên mật khẩu");

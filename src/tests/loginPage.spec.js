@@ -27,7 +27,7 @@ describe("Login Page", () => {
     const attrPlaceholder = await emailField.getAttribute("placeholder");
 
     expect(attrPlaceholder).to.equal("Email của bạn *");
-  }).timeout(20000);
+  });
 
   it("Kiểm tra đăng nhập với email không hợp lệ (sai định dạng)", async () => {
     await openLoginPage(driver);
@@ -45,7 +45,7 @@ describe("Login Page", () => {
     expect(validationMessage).to.equal(
       "Please include an '@' in the email address. 'invalidate.com' is missing an '@'."
     );
-  }).timeout(20000);
+  });
 
   it("Kiểm tra đăng nhập với Email chứa kí tự đặc biệt trong phần tên người dùng (trước dấu '@')", async () => {
     await openLoginPage(driver);
@@ -63,7 +63,7 @@ describe("Login Page", () => {
     expect(validationMessage).to.equal(
       "'.' is used at a wrong position in '.com'."
     );
-  }).timeout(20000);
+  });
 
   it("Kiểm tra đăng nhập với Email chứa kí tự đặc biệt trong phần tên người dùng (sau dấu '@')", async () => {
     await openLoginPage(driver);
@@ -81,7 +81,7 @@ describe("Login Page", () => {
     expect(validationMessage).to.equal(
       "A part following '@' should not contain the symbol '?'."
     );
-  }).timeout(20000);
+  });
 
   it("Kiểm tra Email là trường bắt buộc", async () => {
     await openLoginPage(driver);
@@ -91,7 +91,7 @@ describe("Login Page", () => {
 
     const errorMsg = await getMessageEmailError(driver);
     expect(errorMsg).to.equal("Vui lòng nhập email đăng nhập");
-  }).timeout(20000);
+  });
 
   it("Kiểm tra Mật khẩu là trường bắt buộc", async () => {
     await openLoginPage(driver);
@@ -116,19 +116,19 @@ describe("Login Page", () => {
     isError = isError1 && isError2;
 
     expect(isError).to.equal(true);
-  }).timeout(20000);
+  });
 
   it("Kiểm tra tên nút Đăng nhập", async () => {
     await openLoginPage(driver);
     const textOfLoginBtn = await getTextOfLoginBtn(driver);
     expect(textOfLoginBtn).to.equal("ĐĂNG NHẬP");
-  }).timeout(20000);
+  });
 
   it("Kiểm tra tên nút Quên mật khẩu", async () => {
     await openLoginPage(driver);
     const textOfForgotPasswordBtn = await getTextOfForgotPasswordBtn(driver);
     expect(textOfForgotPasswordBtn).to.equal("Quên mật khẩu");
-  }).timeout(20000);
+  });
 
   it("Kiểm tra điều hướng khi nhấn vào nút quên mật khẩu", async () => {
     await openLoginPage(driver);
@@ -138,7 +138,7 @@ describe("Login Page", () => {
 
     const currentUrl = await driver.getCurrentUrl();
     expect(new URL(currentUrl).pathname).to.equal("/forgot/password");
-  }).timeout(20000);
+  });
 
   it("Kiểm tra đăng nhập với tài khoản không tồn tại trong CSDL", async () => {
     await openLoginPage(driver);
@@ -156,7 +156,7 @@ describe("Login Page", () => {
     const messageLoginFail = await getMessageLoginFail(driver);
 
     expect(messageLoginFail).to.equal("Thông tin tài khoản không tồn tại");
-  }).timeout(20000);
+  });
 
   it("Kiểm tra đăng nhập với Mật khẩu không chính xác", async () => {
     await openLoginPage(driver);
@@ -175,7 +175,7 @@ describe("Login Page", () => {
     const urlBase = `${config.baseURL}/user/account`;
 
     expect(urlBase).to.equal(newUrl);
-  }).timeout(20000);
+  });
 
   it("Kiểm tra đăng nhập với tài khoản đã tồn tại trong CSDL", async () => {
     await openLoginPage(driver);
@@ -194,9 +194,9 @@ describe("Login Page", () => {
     const loginUrl = `${config.baseURL}/`;
 
     expect(loginUrl).to.equal(newUrl);
-  }).timeout(20000);
+  });
 
   after(async () => {
     await driver.quit();
   });
-});
+}).timeout(10000);

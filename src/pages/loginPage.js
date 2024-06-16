@@ -1,14 +1,19 @@
 const { By, until } = require("selenium-webdriver");
 const config = require("../config/config.js");
+const { ACCOUNT_TEST } = require("../utils/constants.js");
 
 const openLoginPage = async (driver) => {
   await driver.get(`${config.baseURL}/user/account`);
 };
 
 const getFieldEmail = async (driver) => {
-  return await driver.findElement(
-    By.xpath("/html/body/section[2]/div/div/div[1]/form/div[1]/input")
-  );
+  try {
+    return await driver.findElement(
+      By.xpath("/html/body/section[2]/div/div/div[1]/form/div[1]/input")
+    );
+  } catch (error) {
+    throw new Error(`Field email failed: ${error.message}`);
+  }
 };
 
 const onClickLoginBtn = async (driver) => {
@@ -40,9 +45,13 @@ const getMessagePasswordError = async (driver) => {
 };
 
 const getFieldPassword = async (driver) => {
-  return await driver.findElement(
-    By.xpath("/html/body/section[2]/div/div/div[1]/form/div[2]/input")
-  );
+  try {
+    return await driver.findElement(
+      By.xpath("/html/body/section[2]/div/div/div[1]/form/div[2]/input")
+    );
+  } catch (error) {
+    throw new Error(`Field password failed: ${error.message}`);
+  }
 };
 
 const getTextOfLoginBtn = async (driver) => {
@@ -82,6 +91,30 @@ const getMessageLoginFail = async (driver) => {
   return messageError;
 };
 
+const performLoginTest = async (driver) => {
+  try {
+    // get email field
+    const emailField = await getFieldEmail(driver);
+    await emailField.sendKeys(ACCOUNT_TEST.email);
+
+    // get password field
+    const fieldPassword = await getFieldPassword(driver);
+    fieldPassword.sendKeys(ACCOUNT_TEST.password);
+
+    await onClickLoginBtn(driver);
+
+    await driver.sleep(1000);
+    const newUrl = await driver.getCurrentUrl();
+    const loginUrl = `${config.baseURL}/`;
+
+    if (newUrl !== loginUrl) {
+      throw new Error("Login thất bại");
+    }
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
 module.exports = {
   openLoginPage,
   onClickLoginBtn,
@@ -93,4 +126,5 @@ module.exports = {
   getTextOfForgotPasswordBtn,
   getElmForgotPassword,
   getMessageLoginFail,
+  performLoginTest,
 };

@@ -1,3 +1,12 @@
+npm install
+composer install
+composer update
+
+// data changed, If you necessary
+php artisan cache:clear
+php artisan route:clear
+php artisan config:clear
+
 === CÁCH CHẠY ===
 note: chạy trong terminal 🥸
 

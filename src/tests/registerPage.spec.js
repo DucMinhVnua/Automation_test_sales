@@ -53,8 +53,12 @@ describe("Register Page", () => {
     await driver.sleep(2000);
 
     const messageErrorEmailField = await getMessageErrorEmailField(driver);
+    const expectedMessage = "Vui lòng nhập vào Email đăng nhập";
 
-    expect(messageErrorEmailField).to.equal("Vui lòng nhập email đăng nhập");
+    expect(messageErrorEmailField).to.equal(
+      expectedMessage,
+      `Expected message to be "${expectedMessage}", but got "${messageErrorEmailField}"`
+    );
   }).timeout(20000);
 
   it("Kiểm tra placeholder của trường Email", async () => {
@@ -134,9 +138,11 @@ describe("Register Page", () => {
     const messageErrorPhoneNumberField = await getMessageErrorPhoneNumberField(
       driver
     );
+    const expectedMessage = "Không đúng định dạng dữ liệu";
 
     expect(messageErrorPhoneNumberField).to.equal(
-      "Không đúng định dạng dữ liệu"
+      expectedMessage,
+      `Expected message to be "${expectedMessage}", but got "${messageErrorPhoneNumberField}"`
     );
   }).timeout(20000);
 
@@ -226,7 +232,7 @@ describe("Register Page", () => {
     const fieldConfirmPassword = await getFieldConfirmPassword(driver);
 
     fullNameField.sendKeys("hanhnb2606");
-    fieldEmail.sendKeys("hanvnuasl2@gmail.com");
+    fieldEmail.sendKeys("hanhvnua@gmail.com");
     fieldPhoneNumber.sendKeys("0982763541");
     fieldPassword.sendKeys("123456789");
     fieldConfirmPassword.sendKeys("123456789");
@@ -238,7 +244,14 @@ describe("Register Page", () => {
     const homeUrl = config.baseURL;
     const currentUrl = await driver.getCurrentUrl();
 
-    expect(currentUrl).to.equal(`${homeUrl}/`);
+    if (currentUrl !== homeUrl) {
+      const errorMessage = `Đăng kí không thành công`;
+      expect.fail(errorMessage);
+    }
+    // expect(currentUrl).to.equal(
+    //   homeUrl,
+    //   `Expected to be ${homeUrl}, but got ${currentUrl}`
+    // );
   }).timeout(20000);
 
   after(async () => {
